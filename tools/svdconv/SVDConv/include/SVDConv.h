@@ -7,6 +7,7 @@
 #define SvdConv_H
 
 #include "SvdOptions.h"
+#include "SvdDevice.h"
 #include "ErrLog.h"
 
 #include <string>
@@ -32,7 +33,23 @@ public:
   int Check(int argc, const char* argv[], const char* envp[]);
   SVD_ERR CheckSvdFile();
 
-protected:
+  void PrintDevice(SvdDevice *device);
+  void PrintPeripheral(SvdPeripheral *const peri, const std::__cxx11::list<SvdInterrupt *> &interrupts);
+  void PrintRegistersContainer(SvdPeripheral *const peri);
+  void PrintRegistersClusters(const std::__cxx11::list<SvdItem *> &childs, int numSpaces);
+  void PrintRegisterWrapper(SvdRegister *reg, int numSpaces);
+  void PrintFieldWrapper(SvdField *const field, int numSpaces);
+  void PrintEnumContainerWrapper(SvdEnumContainer *const enumContainer, int numSpaces);
+  void PrintEnum(SvdEnum *const &enum_, int numSpaces);
+  void PrintEnumContainer(SvdEnumContainer *const enumContainer, int numSpaces);
+  void PrintClusterWrapper(SvdCluster *cluster, int numSpaces);
+  void PrintCluster(SvdCluster *cluster, int numSpaces);
+  void PrintRegister(SvdRegister *reg, int numSpaces);
+  void PrintInterrupts(const std::__cxx11::list<SvdInterrupt *> &interrupts);
+  void PrintAddressBlocks(SvdPeripheral *const peri);
+  void PrintField(SvdField *field, int numSpaces);
+  
+  protected:
   bool InitMessageTable();
 
 private:
